@@ -1,36 +1,42 @@
-"use client"
+'use client'
 
-import { CheckIcon } from "lucide-react"
-
-export default function PricingPage() {
-  const tiers = [
+export default function Pricing() {
+  const plans = [
     {
       name: "Starter",
-      price: 0,
+      price: "$0",
+      period: "/month",
       description: "Perfect for small teams",
-      features: ["Up to 5 users", "10 projects", "Basic support", "5GB storage"],
-      button: "Get Started",
-      highlighted: false,
+      features: [
+        "Up to 5 users",
+        "10 projects",
+        "Basic support",
+        "5GB storage"
+      ],
+      buttonText: "Get Started",
+      highlighted: false
     },
     {
       name: "Professional",
-      price: 29,
-      description: "Most Popular",
-      subDescription: "For growing teams",
+      price: "$29",
+      period: "/month",
+      description: "For growing teams",
+      badge: "Most Popular",
       features: [
         "Up to 20 users",
         "Unlimited projects",
         "Priority support",
         "100GB storage",
         "Advanced analytics",
-        "Custom integrations",
+        "Custom integrations"
       ],
-      button: "Start Free Trial",
-      highlighted: true,
+      buttonText: "Start Free Trial",
+      highlighted: true
     },
     {
       name: "Enterprise",
-      price: 99,
+      price: "$99",
+      period: "/month",
       description: "For large organizations",
       features: [
         "Unlimited users",
@@ -38,122 +44,102 @@ export default function PricingPage() {
         "24/7 dedicated support",
         "Unlimited storage",
         "Advanced security",
-        "Custom training",
+        "Custom training"
       ],
-      button: "Contact Sales",
-      highlighted: false,
-    },
+      buttonText: "Contact Sales",
+      highlighted: false
+    }
   ]
+
   return (
-    <section className="py-16 md:py-24 bg-gray-50">
+    <section className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="py-16">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 text-balance">
-              Simple, Transparent Pricing
-            </h1>
-            <p className="text-lg text-muted-foreground text-balance">
-              Choose the perfect plan for your team. Always flexible to scale.
-            </p>
-          </div>
+        {/* Heading */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Simple, Transparent Pricing
+          </h2>
+          <p className="text-xl text-gray-600">
+            Choose the perfect plan for your team. Always flexible to scale.
+          </p>
         </div>
+
         {/* Pricing Cards */}
-        <div className="py-12 pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {tiers.map((tier, index) => (
-              <div
-                key={index}
-                className={`relative flex flex-col h-full transition-all duration-300 hover:shadow-lg ${
-                  tier.highlighted ? "md:scale-105 md:z-10" : "md:pt-6"
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {plans.map((plan, index) => (
+            <div
+              key={index}
+              className={`relative rounded-2xl p-8 ${
+                plan.highlighted
+                  ? 'bg-blue-600 text-white shadow-2xl scale-105 border-4 border-blue-400'
+                  : 'bg-white border-2 border-gray-200 shadow-lg'
+              }`}
+            >
+              {/* Badge */}
+              {plan.badge && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-yellow-400 text-gray-900 px-4 py-1 rounded-full text-sm font-bold">
+                    {plan.badge}
+                  </span>
+                </div>
+              )}
+
+              {/* Plan Name */}
+              <h3 className={`text-2xl font-bold mb-2 ${plan.highlighted ? 'text-white' : 'text-gray-900'}`}>
+                {plan.name}
+              </h3>
+              <p className={`mb-6 ${plan.highlighted ? 'text-blue-100' : 'text-gray-600'}`}>
+                {plan.description}
+              </p>
+
+              {/* Price */}
+              <div className="mb-6">
+                <span className={`text-5xl font-bold ${plan.highlighted ? 'text-white' : 'text-gray-900'}`}>
+                  {plan.price}
+                </span>
+                <span className={`text-lg ${plan.highlighted ? 'text-blue-100' : 'text-gray-600'}`}>
+                  {plan.period}
+                </span>
+              </div>
+
+              {/* Button */}
+              <button
+                className={`w-full py-3 px-6 rounded-lg font-semibold mb-8 transition ${
+                  plan.highlighted
+                    ? 'bg-white text-blue-600 hover:bg-gray-100'
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
                 }`}
               >
-                {/* Card Container */}
-                <div
-                  className={`flex flex-col flex-grow rounded-2xl p-8 ${
-                    tier.highlighted
-                      ? "bg-primary text-primary-foreground border-2 border-primary shadow-xl"
-                      : "bg-card text-card-foreground border border-border hover:border-foreground/20"
-                  }`}
-                >
-                  {/* Badge for popular tier */}
-                  {tier.highlighted && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <div className="bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-semibold">
-                        Most Popular
-                      </div>
-                    </div>
-                  )}
-                  {/* Tier Name */}
-                  <h3 className="text-xl md:text-2xl font-bold mb-2">{tier.name}</h3>
-                  {/* Description */}
-                  <p
-                    className={`text-sm mb-6 ${
-                      tier.highlighted ? "text-primary-foreground/80" : "text-muted-foreground"
-                    }`}
-                  >
-                    {tier.description}
-                  </p>
-                  {tier.subDescription && (
-                    <p
-                      className={`text-sm mb-4 ${
-                        tier.highlighted ? "text-primary-foreground/70" : "text-muted-foreground"
-                      }`}
+                {plan.buttonText}
+              </button>
+
+              {/* Features */}
+              <ul className="space-y-4">
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <svg
+                      className={`w-6 h-6 flex-shrink-0 ${plan.highlighted ? 'text-blue-200' : 'text-green-500'}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      {tier.subDescription}
-                    </p>
-                  )}
-                  {/* Pricing */}
-                  <div className="mb-6">
-                    <span className="text-4xl md:text-5xl font-bold">${tier.price}</span>
-                    <span
-                      className={`text-sm ml-2 ${
-                        tier.highlighted ? "text-primary-foreground/80" : "text-muted-foreground"
-                      }`}
-                    >
-                      /month
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    <span className={plan.highlighted ? 'text-blue-50' : 'text-gray-700'}>
+                      {feature}
                     </span>
-                  </div>
-                  {/* CTA Button */}
-                  <button
-                    className={`w-full py-3 px-4 rounded-lg font-semibold mb-8 transition-colors duration-200 ${
-                      tier.highlighted
-                        ? "bg-accent text-accent-foreground hover:bg-accent/90"
-                        : "bg-primary text-primary-foreground hover:bg-primary/90"
-                    }`}
-                  >
-                    {tier.button}
-                  </button>
-                  {/* Features List */}
-                  <div className="space-y-4 flex-grow">
-                    <p
-                      className={`text-sm font-semibold mb-4 ${
-                        tier.highlighted ? "text-primary-foreground/90" : "text-foreground"
-                      }`}
-                    >
-                      What's included:
-                    </p>
-                    <ul className="space-y-3">
-                      {tier.features.map((feature, featureIndex) => (
-                        <li
-                          key={featureIndex}
-                          className={`flex items-start gap-3 text-sm ${
-                            tier.highlighted ? "text-primary-foreground/90" : "text-card-foreground"
-                          }`}
-                        >
-                          <CheckIcon className="w-5 h-5 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   )
 }
-
