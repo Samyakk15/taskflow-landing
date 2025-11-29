@@ -1,143 +1,181 @@
-'use client'
+"use client"
+
+import { Check, Sparkles } from 'lucide-react'
 
 export default function Pricing() {
   const plans = [
     {
       name: "Starter",
-      price: "$0",
-      period: "/month",
-      description: "Perfect for small teams",
+      price: "0",
+      period: "forever",
+      description: "Perfect for small teams getting started",
       features: [
-        "Up to 5 users",
+        "Up to 5 team members",
         "10 projects",
         "Basic support",
-        "5GB storage"
+        "5GB storage",
+        "Mobile apps",
+        "Email notifications"
       ],
-      buttonText: "Get Started",
-      highlighted: false
+      buttonText: "Start Free",
+      popular: false,
+      buttonStyle: "bg-gray-900 text-white hover:bg-gray-800"
     },
     {
       name: "Professional",
-      price: "$29",
-      period: "/month",
-      description: "For growing teams",
-      badge: "Most Popular",
+      price: "29",
+      period: "per month",
+      description: "For growing teams that need more power",
       features: [
-        "Up to 20 users",
+        "Up to 20 team members",
         "Unlimited projects",
         "Priority support",
         "100GB storage",
         "Advanced analytics",
-        "Custom integrations"
+        "Custom integrations",
+        "API access",
+        "Team permissions"
       ],
       buttonText: "Start Free Trial",
-      highlighted: true
+      popular: true,
+      buttonStyle: "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:shadow-xl hover:scale-105"
     },
     {
       name: "Enterprise",
-      price: "$99",
-      period: "/month",
-      description: "For large organizations",
+      price: "99",
+      period: "per month",
+      description: "For large organizations with advanced needs",
       features: [
-        "Unlimited users",
+        "Unlimited team members",
         "Unlimited projects",
         "24/7 dedicated support",
         "Unlimited storage",
         "Advanced security",
-        "Custom training"
+        "Custom training",
+        "SLA guarantee",
+        "Dedicated account manager"
       ],
       buttonText: "Contact Sales",
-      highlighted: false
+      popular: false,
+      buttonStyle: "bg-gray-900 text-white hover:bg-gray-800"
     }
   ]
 
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Simple, Transparent Pricing
+    <section className="py-24 bg-white relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-indigo-50/50 to-white"></div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-20">
+          <span className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-semibold text-sm mb-4">
+            PRICING
+          </span>
+          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            Simple,{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+              transparent pricing
+            </span>
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
             Choose the perfect plan for your team. Always flexible to scale.
           </p>
+          
+          {/* Toggle */}
+          <div className="inline-flex items-center gap-3 p-1 bg-gray-100 rounded-full">
+            <button className="px-6 py-2 rounded-full bg-white shadow-sm font-semibold text-gray-900">
+              Monthly
+            </button>
+            <button className="px-6 py-2 rounded-full font-semibold text-gray-600 hover:text-gray-900">
+              Annual
+              <span className="ml-2 text-xs text-green-600 font-bold">Save 20%</span>
+            </button>
+          </div>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Pricing cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`relative rounded-2xl p-8 ${
-                plan.highlighted
-                  ? 'bg-blue-600 text-white shadow-2xl scale-105 border-4 border-blue-400'
-                  : 'bg-white border-2 border-gray-200 shadow-lg'
-              }`}
+              className={`relative rounded-3xl p-8 ${
+                plan.popular
+                  ? 'bg-gradient-to-b from-indigo-600 to-purple-600 text-white shadow-2xl scale-105 border-4 border-indigo-400'
+                  : 'bg-white border-2 border-gray-200 hover:border-indigo-300 hover:shadow-xl'
+              } transition-all duration-300`}
             >
-              {/* Badge */}
-              {plan.badge && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-yellow-400 text-gray-900 px-4 py-1 rounded-full text-sm font-bold">
-                    {plan.badge}
-                  </span>
+              {/* Popular badge */}
+              {plan.popular && (
+                <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
+                  <div className="flex items-center gap-1 px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full text-gray-900 font-bold text-sm shadow-lg">
+                    <Sparkles className="w-4 h-4" />
+                    <span>Most Popular</span>
+                  </div>
                 </div>
               )}
 
-              {/* Plan Name */}
-              <h3 className={`text-2xl font-bold mb-2 ${plan.highlighted ? 'text-white' : 'text-gray-900'}`}>
-                {plan.name}
-              </h3>
-              <p className={`mb-6 ${plan.highlighted ? 'text-blue-100' : 'text-gray-600'}`}>
-                {plan.description}
-              </p>
-
-              {/* Price */}
+              {/* Plan header */}
               <div className="mb-6">
-                <span className={`text-5xl font-bold ${plan.highlighted ? 'text-white' : 'text-gray-900'}`}>
-                  {plan.price}
-                </span>
-                <span className={`text-lg ${plan.highlighted ? 'text-blue-100' : 'text-gray-600'}`}>
-                  {plan.period}
-                </span>
+                <h3 className={`text-2xl font-bold mb-2 ${plan.popular ? 'text-white' : 'text-gray-900'}`}>
+                  {plan.name}
+                </h3>
+                <p className={`text-sm ${plan.popular ? 'text-indigo-100' : 'text-gray-600'}`}>
+                  {plan.description}
+                </p>
               </div>
 
-              {/* Button */}
-              <button
-                className={`w-full py-3 px-6 rounded-lg font-semibold mb-8 transition ${
-                  plan.highlighted
-                    ? 'bg-white text-blue-600 hover:bg-gray-100'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
-                }`}
-              >
+              {/* Price */}
+              <div className="mb-8">
+                <div className="flex items-baseline gap-2">
+                  <span className={`text-6xl font-bold ${plan.popular ? 'text-white' : 'text-gray-900'}`}>
+                    ${plan.price}
+                  </span>
+                  <span className={`text-lg ${plan.popular ? 'text-indigo-100' : 'text-gray-600'}`}>
+                    /{plan.period}
+                  </span>
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <button className={`w-full py-4 px-6 rounded-xl font-semibold transition-all duration-200 mb-8 ${
+                plan.popular
+                  ? 'bg-white text-indigo-600 hover:shadow-xl hover:scale-105'
+                  : plan.buttonStyle
+              }`}>
                 {plan.buttonText}
               </button>
 
               {/* Features */}
-              <ul className="space-y-4">
+              <div className="space-y-4">
+                <div className={`text-sm font-semibold mb-4 ${plan.popular ? 'text-indigo-100' : 'text-gray-500'}`}>
+                  WHAT'S INCLUDED
+                </div>
                 {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <svg
-                      className={`w-6 h-6 flex-shrink-0 ${plan.highlighted ? 'text-blue-200' : 'text-green-500'}`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span className={plan.highlighted ? 'text-blue-50' : 'text-gray-700'}>
+                  <div key={i} className="flex items-start gap-3">
+                    <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${
+                      plan.popular ? 'bg-white/20' : 'bg-indigo-100'
+                    }`}>
+                      <Check className={`w-4 h-4 ${plan.popular ? 'text-white' : 'text-indigo-600'}`} strokeWidth={3} />
+                    </div>
+                    <span className={`text-sm ${plan.popular ? 'text-indigo-50' : 'text-gray-700'}`}>
                       {feature}
                     </span>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           ))}
+        </div>
+
+        {/* Bottom note */}
+        <div className="text-center mt-16">
+          <p className="text-gray-600 mb-4">
+            All plans include a 14-day free trial. No credit card required.
+          </p>
+          <button className="text-indigo-600 font-semibold hover:text-indigo-700">
+            Compare all features →
+          </button>
         </div>
       </div>
     </section>

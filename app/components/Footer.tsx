@@ -1,127 +1,83 @@
-import { Twitter, Linkedin, Github, Instagram } from "lucide-react"
+"use client"
+
+import { Twitter, Linkedin, Github, Instagram } from 'lucide-react'
 
 export default function Footer() {
   const footerLinks = {
-    product: [
-      { label: "Features", href: "#" },
-      { label: "Pricing", href: "#" },
-      { label: "Testimonials", href: "#" },
-      { label: "Integrations", href: "#" },
-    ],
-    company: [
-      { label: "About Us", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Blog", href: "#" },
-      { label: "Press Kit", href: "#" },
-    ],
-    resources: [
-      { label: "Documentation", href: "#" },
-      { label: "Help Center", href: "#" },
-      { label: "API Reference", href: "#" },
-      { label: "Community", href: "#" },
-    ],
-    legal: [
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Service", href: "#" },
-      { label: "Cookie Policy", href: "#" },
-    ],
+    Product: ['Features', 'Pricing', 'Testimonials', 'Integrations', 'Changelog', 'Roadmap'],
+    Company: ['About Us', 'Careers', 'Blog', 'Press Kit', 'Partners', 'Contact'],
+    Resources: ['Documentation', 'Help Center', 'API Reference', 'Community', 'Guides', 'Webinars'],
+    Legal: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Security', 'GDPR', 'Compliance']
   }
 
   const socialLinks = [
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Twitter, href: '#', label: 'Twitter' },
+    { icon: Linkedin, href: '#', label: 'LinkedIn' },
+    { icon: Github, href: '#', label: 'GitHub' },
+    { icon: Instagram, href: '#', label: 'Instagram' }
   ]
 
   return (
-    <footer className="bg-gray-900 text-gray-100">
-      {/* Main footer content */}
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
-        {/* Header section with logo and tagline */}
-        <div className="mb-12 grid grid-cols-1 gap-12 md:mb-16 md:grid-cols-5">
-          <div className="md:col-span-1">
-            <h3 className="text-xl md:text-2xl font-bold text-white">TaskFlow</h3>
-            <p className="mt-2 text-sm text-gray-400">Streamlining workflows for modern teams</p>
-          </div>
-          {/* Link columns */}
-          <div className="md:col-span-4">
-            <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-              {/* Product column */}
-              <div>
-                <h4 className="text-sm font-semibold text-white">Product</h4>
-                <ul className="mt-4 space-y-3">
-                  {footerLinks.product.map((link) => (
-                    <li key={link.label}>
-                      <a href={link.href} className="text-sm text-gray-400 transition-colors hover:text-white">
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              {/* Company column */}
-              <div>
-                <h4 className="text-sm font-semibold text-white">Company</h4>
-                <ul className="mt-4 space-y-3">
-                  {footerLinks.company.map((link) => (
-                    <li key={link.label}>
-                      <a href={link.href} className="text-sm text-gray-400 transition-colors hover:text-white">
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              {/* Resources column */}
-              <div>
-                <h4 className="text-sm font-semibold text-white">Resources</h4>
-                <ul className="mt-4 space-y-3">
-                  {footerLinks.resources.map((link) => (
-                    <li key={link.label}>
-                      <a href={link.href} className="text-sm text-gray-400 transition-colors hover:text-white">
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              {/* Legal column */}
-              <div>
-                <h4 className="text-sm font-semibold text-white">Legal</h4>
-                <ul className="mt-4 space-y-3">
-                  {footerLinks.legal.map((link) => (
-                    <li key={link.label}>
-                      <a href={link.href} className="text-sm text-gray-400 transition-colors hover:text-white">
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+    <footer className="bg-slate-950 border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-12">
+          {/* Brand Column */}
+          <div className="lg:col-span-2">
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text mb-4">
+              TaskFlow
+            </h3>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Streamlining workflows for modern teams. Built with love for productivity enthusiasts worldwide.
+            </p>
+            
+            {/* Social Links */}
+            <div className="flex gap-4">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-200"
+                >
+                  <social.icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
+
+          {/* Links Columns */}
+          {Object.entries(footerLinks).map(([category, links]) => (
+            <div key={category}>
+              <h4 className="font-semibold text-white mb-4">{category}</h4>
+              <ul className="space-y-3">
+                {links.map((link, index) => (
+                  <li key={index}>
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
+                    >
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-        {/* Bottom section with social and copyright */}
-        <div className="border-t border-gray-800 pt-8 sm:flex sm:items-center sm:justify-between">
-          {/* Social media icons */}
-          <div className="flex gap-6">
-            {socialLinks.map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                className="text-gray-400 transition-colors hover:text-white"
-              >
-                <Icon size={20} />
-              </a>
-            ))}
+
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-400 text-sm">
+            © 2024 TaskFlow. All rights reserved.
+          </p>
+          <div className="flex items-center gap-6 text-sm text-gray-400">
+            <a href="#" className="hover:text-white transition-colors">Status</a>
+            <a href="#" className="hover:text-white transition-colors">Sitemap</a>
+            <a href="#" className="hover:text-white transition-colors">Accessibility</a>
           </div>
-          {/* Copyright text */}
-          <p className="mt-4 text-sm text-gray-400 sm:mt-0">© 2025 TaskFlow. All rights reserved.</p>
         </div>
       </div>
     </footer>
   )
 }
-
