@@ -11,6 +11,9 @@ const config: Config = {
             fontFamily: {
                 handwriting: ['var(--font-handwriting)'],
             },
+            gridTemplateRows: {
+                'auto-fit': 'repeat(auto-fit, minmax(0, 1fr))',
+            },
         },
     },
     plugins: [],

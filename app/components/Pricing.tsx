@@ -62,7 +62,7 @@ export default function Pricing() {
   ]
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section id="pricing" className="py-24 md:py-32 bg-white relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-indigo-50/50 to-white"></div>
 
@@ -81,7 +81,7 @@ export default function Pricing() {
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
             Choose the perfect plan for your team. Always flexible to scale.
           </p>
-          
+
           {/* Toggle */}
           <div className="inline-flex items-center gap-3 p-1 bg-gray-100 rounded-full">
             <button className="px-6 py-2 rounded-full bg-white shadow-sm font-semibold text-gray-900">
@@ -99,11 +99,10 @@ export default function Pricing() {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`relative rounded-3xl p-8 ${
-                plan.popular
+              className={`relative rounded-3xl p-8 ${plan.popular
                   ? 'bg-gradient-to-b from-indigo-600 to-purple-600 text-white shadow-2xl scale-105 border-4 border-indigo-400'
                   : 'bg-white border-2 border-gray-200 hover:border-indigo-300 hover:shadow-xl'
-              } transition-all duration-300`}
+                } transition-all duration-300`}
             >
               {/* Popular badge */}
               {plan.popular && (
@@ -138,11 +137,10 @@ export default function Pricing() {
               </div>
 
               {/* CTA Button */}
-              <button className={`w-full py-4 px-6 rounded-xl font-semibold transition-all duration-200 mb-8 ${
-                plan.popular
+              <button className={`w-full py-4 px-6 rounded-xl font-semibold transition-all duration-200 mb-8 ${plan.popular
                   ? 'bg-white text-indigo-600 hover:shadow-xl hover:scale-105'
                   : plan.buttonStyle
-              }`}>
+                }`}>
                 {plan.buttonText}
               </button>
 
@@ -153,9 +151,8 @@ export default function Pricing() {
                 </div>
                 {plan.features.map((feature, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${
-                      plan.popular ? 'bg-white/20' : 'bg-indigo-100'
-                    }`}>
+                    <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${plan.popular ? 'bg-white/20' : 'bg-indigo-100'
+                      }`}>
                       <Check className={`w-4 h-4 ${plan.popular ? 'text-white' : 'text-indigo-600'}`} strokeWidth={3} />
                     </div>
                     <span className={`text-sm ${plan.popular ? 'text-indigo-50' : 'text-gray-700'}`}>
