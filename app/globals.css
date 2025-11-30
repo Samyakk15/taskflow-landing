@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-handwriting: var(--font-handwriting);
+}
+
 /* Optional: plain CSS, NO @apply */
 
 html {
